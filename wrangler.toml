@@ -2,9 +2,5 @@
 name = "zivis"
 pages_build_output_dir = "dist"
 
-[build]
-command = "npm run build"
-watch_dir = "/src"
-
 [vars]
 # NODE_VERSION = "20"
