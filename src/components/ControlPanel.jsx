@@ -30,12 +30,12 @@ const GithubIcon = ({ size = 20 }) => (
 );
 
 const COLORS = [
-  '#00ffff', // Neon Cyan
-  '#ff00ff', // Neon Pink
-  '#ffff00', // Neon Yellow
-  '#00ff00', // Neon Green
-  '#ff0000', // Neon Red
-  '#ffffff', // Pure White
+  '#00ffff',
+  '#ff00ff',
+  '#ffff00',
+  '#00ff00',
+  '#ff0000',
+  '#ffffff',
 ];
 
 const ControlPanel = ({
@@ -54,7 +54,7 @@ const ControlPanel = ({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div style={{
+    <div className="glass-card" style={{
       position: 'fixed',
       right: '24px',
       top: '24px',
@@ -63,44 +63,54 @@ const ControlPanel = ({
       flexDirection: 'column',
       gap: '12px',
       alignItems: 'flex-end',
+      padding: '16px',
+      background: 'rgba(8, 10, 18, 0.85)',
+      backdropFilter: 'blur(20px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      borderRadius: '20px',
     }}>
       <motion.button
-        className="glass-meta"
+        className="glass-btn"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         style={{
           width: '48px',
           height: '48px',
-          borderRadius: '16px',
+          borderRadius: '14px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           cursor: 'pointer',
+          background: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
-        <Settings size={22} />
+        <Settings size={22} style={{ color: '#fff' }} />
       </motion.button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="glass-meta"
             initial={{ opacity: 0, x: 20, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 20, scale: 0.95 }}
             style={{
-              borderRadius: '24px',
+              borderRadius: '20px',
               padding: '24px',
               width: '280px',
               color: '#fff',
               display: 'flex',
               flexDirection: 'column',
               gap: '24px',
-              marginTop: '12px'
+              marginTop: '12px',
+              background: 'rgba(8, 10, 18, 0.9)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
             }}
           >
-            {/* Color Palette */}
             <div>
               <div style={{
                 display: 'flex',
@@ -134,7 +144,6 @@ const ControlPanel = ({
               </div>
             </div>
 
-            {/* Sliders */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)', marginBottom: '8px' }}>
@@ -164,7 +173,6 @@ const ControlPanel = ({
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <ActionButton icon={<Undo2 size={18} />} label="Undo" onClick={onUndo} />
               <ActionButton icon={<Redo2 size={18} />} label="Redo" onClick={onRedo} />
@@ -191,7 +199,6 @@ const ControlPanel = ({
         )}
       </AnimatePresence>
 
-      {/* Branding / Social Links */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -244,7 +251,6 @@ const ControlPanel = ({
 
 const ActionButton = ({ icon, label, onClick, active = false }) => (
   <motion.button
-    className="glass-meta"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={onClick}
@@ -259,8 +265,9 @@ const ActionButton = ({ icon, label, onClick, active = false }) => (
       cursor: 'pointer',
       fontSize: '10px',
       transition: 'all 0.2s',
-      boxShadow: active ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none',
-      border: active ? '1px solid rgba(255, 255, 255, 0.4)' : undefined
+      background: active ? 'rgba(0, 242, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+      border: active ? '1px solid rgba(0, 242, 255, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
+      boxShadow: active ? '0 0 15px rgba(0, 242, 255, 0.3)' : 'none',
     }}
   >
     {icon}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LayoutGrid, Hand, Paintbrush, ShieldCheck, Atom, Settings, Terminal, ExternalLink, Cpu, Wifi, Battery, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './styles/App.css';
+import './App.css';
 
 const Dashboard = ({ onLaunch }) => (
   <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="p-12 space-y-16 relative">
@@ -17,8 +17,7 @@ const Dashboard = ({ onLaunch }) => (
             </div>
         </div>
         <h1 className="text-7xl font-black font-outfit mb-6 tracking-tight">
-            <span className="gradient-text">JARVIS</span>
-            <span className="text-white ml-4">BD</span>
+            <span className="gradient-text">ZIVIS</span>
         </h1>
         <p className="text-gray-400 max-w-2xl text-lg font-medium leading-relaxed">Welcome back, User. Your integrated AI ecosystem is fully operational. All neural pathways are synchronized and ready for deployment.</p>
         
@@ -51,7 +50,7 @@ const Dashboard = ({ onLaunch }) => (
             <div className="terminal-dots">
                 <span></span><span></span><span></span>
             </div>
-            <span>SYSTEM LOG // JARVIS_CORE</span>
+            <span>SYSTEM LOG // ZIVIS_CORE</span>
         </div>
         <div className="terminal-body">
             <p><span className="text-cyan-400">[</span><span className="text-gray-500">2026.04.09</span><span className="text-cyan-400">]</span> Initializing neural bridge protocols... <span className="text-green-400">COMPLETE</span></p>
