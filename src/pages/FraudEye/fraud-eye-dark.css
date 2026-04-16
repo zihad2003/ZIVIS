@@ -1,0 +1,160 @@
+/* ─── FraudEye Dark Glass Theme Override ─────────────────────────────────────
+ * Maps FraudEye's light Apple theme to ZIVIS's dark glassmorphism system.
+ * Loaded only within FraudEyeApp scope.
+ */
+
+/* Scoped to fraud-eye container so it doesn't pollute hub styles */
+.fraud-eye-root {
+  /* Re-map FraudEye CSS variables to ZIVIS dark palette */
+  --background: #03040a;
+  --card: rgba(255, 255, 255, 0.03);
+  --text: #f8f8ff;
+  --text-secondary: #71768b;
+  --primary: #00f2ff;           /* cyan (was blue) */
+  --secondary: rgba(255,255,255,0.12);
+  --accent: #ff007a;            /* pink = risk/alert color */
+  --border: rgba(255, 255, 255, 0.07);
+  --glass: rgba(8, 10, 18, 0.85);
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --radius: 20px;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Apply dark background to the full fraud-eye area */
+.fraud-eye-root,
+.fraud-eye-root body {
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+}
+
+/* Glass nav — dark header */
+.fraud-eye-root .glass-nav {
+  background: rgba(8, 10, 18, 0.85) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Apple-card → glass card */
+.fraud-eye-root .apple-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  color: var(--text) !important;
+}
+
+.fraud-eye-root .apple-card:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Primary button → cyan glass button */
+.fraud-eye-root .apple-btn {
+  background: linear-gradient(135deg, rgba(0,242,255,0.15), rgba(0,128,255,0.1)) !important;
+  color: #00f2ff !important;
+  border: 1px solid rgba(0,242,255,0.4) !important;
+  border-radius: 12px !important;
+  transition: var(--transition) !important;
+}
+
+.fraud-eye-root .apple-btn:hover {
+  background: #00f2ff !important;
+  color: #000 !important;
+  box-shadow: 0 0 30px rgba(0,242,255,0.4) !important;
+  transform: scale(1.02) !important;
+}
+
+/* Secondary button */
+.fraud-eye-root .apple-btn-secondary {
+  background: rgba(255,255,255,0.05) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.fraud-eye-root .apple-btn-secondary:hover {
+  background: rgba(255,255,255,0.08) !important;
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+}
+
+/* Typography */
+.fraud-eye-root .apple-heading {
+  color: var(--text) !important;
+}
+
+/* Scrollbar */
+.fraud-eye-root ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1) !important;
+}
+
+.fraud-eye-root ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+/* Table styles for dark mode */
+.fraud-eye-root table th,
+.fraud-eye-root table td {
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.05) !important;
+}
+
+.fraud-eye-root table thead tr {
+  background: rgba(255,255,255,0.03) !important;
+}
+
+/* Input fields */
+.fraud-eye-root input[type="text"],
+.fraud-eye-root input[type="email"],
+.fraud-eye-root input[type="password"],
+.fraud-eye-root textarea,
+.fraud-eye-root select {
+  background: rgba(0,0,0,0.3) !important;
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+.fraud-eye-root input:focus,
+.fraud-eye-root textarea:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 15px rgba(0,242,255,0.2) !important;
+}
+
+/* Stat items — dark glass */
+.fraud-eye-root [style*="background: rgba(255, 255, 255, 0.5)"],
+.fraud-eye-root [style*="background: rgba(255, 255, 255, 0.7)"] {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* Footer */
+.fraud-eye-root footer {
+  background: rgba(8,10,18,0.9) !important;
+  border-top-color: rgba(255,255,255,0.06) !important;
+}
+
+/* spinner */
+.fraud-eye-root .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: #00f2ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Upload drop zone */
+.fraud-eye-root [style*="borderStyle: 'dashed'"] {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+/* Graph tooltip */
+.fraud-eye-root [style*="backgroundColor: 'rgba(255, 255, 255, 0.8)'"] {
+  background: rgba(8,10,18,0.9) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #f8f8ff !important;
+}

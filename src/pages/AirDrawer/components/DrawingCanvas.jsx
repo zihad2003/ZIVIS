@@ -160,14 +160,12 @@ const DrawingCanvas = forwardRef(({
   return (
     <canvas
       ref={canvasRef}
-      className="gesture-canvas"   /* touch-action: none scoped here only */
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         zIndex: 10,
         pointerEvents: 'none',
-        touchAction: 'none',       /* prevent scroll interference during drawing */
       }}
     />
   );

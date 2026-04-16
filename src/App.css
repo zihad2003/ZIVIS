@@ -489,8 +489,309 @@
 .fallback-pattern {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* ─── Touch-friendly active states ──────────────────────────────────────────── */
+/* Replace hover-only affordances with touch-compatible :active states */
+
+/* ExternalLink arrow on project cards: always visible on touch, hover on pointer */
+@media (hover: none) {
+  .group .corner-accent     { opacity: 0.3; }
+  .group .card-grid-bg      { opacity: 0.6; }
+  /* Show the arrow icon that was hidden until hover */
+  .group .opacity-0         { opacity: 1 !important; transform: none !important; }
+}
+
+/* Tap highlight on interactive elements */
+.launch-btn:active,
+.glass-btn:active,
+.nav-item:active,
+.stat-box:active {
+  opacity: 0.8;
+  transform: scale(0.97);
+}
+
+/* ─── Responsive Layout ──────────────────────────────────────────────────────── */
+/* Base: 3-column hub layout for desktops ≥ 1024px */
+.hub-container {
+  height: 100dvh; /* dynamic viewport height for mobile browsers */
+  width: 100vw;
+}
+
+/* Tablet: hide agents panel, narrow sidebar */
+@media (max-width: 1200px) {
+  .hub-container {
+    grid-template-columns: 72px 1fr 0px;
+  }
+  #agents {
+    display: none;
+  }
+}
+
+/* Small tablet / large phone (landscape): collapse sidebar to bottom tab bar */
+@media (max-width: 768px) {
+  .hub-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 64px;
+    grid-template-areas:
+      "main"
+      "sidebar";
+  }
+
+  #sidebar {
+    grid-area: sidebar;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 12px;
+    border-right: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    gap: 0;
+    height: 64px;
+    width: 100%;
+  }
+
+  /* Hide logo and bottom items on mobile sidebar */
+  #sidebar > :first-child,       /* J logo */
+  #sidebar > :last-child,        /* pulse dot */
+  #sidebar .mt-auto              { display: none; }
+
+  #sidebar .flex.flex-col.gap-4 {
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+    width: auto;
+  }
+
+  main {
+    grid-area: main;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Tighten hero padding on mobile */
+  main > div > div.p-12 {
+    padding: 20px 16px;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Header collapses on mobile */
+  main > header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* Phone portrait */
+@media (max-width: 480px) {
+  .hub-container {
+    grid-template-rows: 1fr 56px;
+  }
+
+  #sidebar {
+    height: 56px;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-box {
+    padding: 12px;
+  }
+
+  .stat-value {
+    font-size: 13px;
+  }
+}
+/* ═══════════════════════════════════════════════════════════════
+   MISSING CORE CLASSES — added to fix white-screen / unstyled hub
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Glassmorphism panel — used on sidebar + agents panel */
+.glass {
+  background: rgba(8, 10, 18, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Gradient headline text */
+.gradient-text {
+  background: linear-gradient(135deg, #00f2ff 0%, #0080ff 40%, #ff007a 80%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass input field */
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #f8f8ff;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+.glass-input:focus {
+  border-color: rgba(0, 242, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 242, 255, 0.15);
+}
+.glass-input::placeholder { color: rgba(255,255,255,0.25); }
+
+/* Glowing background orbs */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -100px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(255, 0, 122, 0.07) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 10px) scale(0.97); }
+}
+
+/* Animated grid overlay */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* Horizontal scan-line animation */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.4), transparent);
+  animation: scanH 6s linear infinite;
+}
+@keyframes scanH {
+  0%   { top: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Vertical scan-line (agents panel) */
+.scan-line-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(0, 242, 255, 0.25), transparent);
+  animation: scanV 8s linear infinite;
+}
+@keyframes scanV {
+  0%   { left: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Project card (module grid card) */
+.project-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 32px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+.project-card .corner-accent { opacity: 0; transition: opacity 0.3s; }
+.project-card:hover .corner-accent { opacity: 1; }
+
+/* Circuit pattern background (decorative) */
+.circuit-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.project-card:hover .circuit-pattern { opacity: 1; }
+
+/* Agent card */
+.agent-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  transition: all 0.3s ease;
+}
+.agent-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Monitor bar / header (settings page) */
+.monitor-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px 12px 0 0;
+}
+.monitor-header {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
 }

@@ -1,0 +1,25 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+        'outfit': ['Outfit', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        accent: '#00f2ff',
+        secondary: '#ff007a',
+        tertiary: '#ffd700',
+      },
+      backdropBlur: {
+        glass: '20px',
+      },
+    },
+  },
+  plugins: [],
+}

@@ -51,6 +51,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-main);
+  /* touch-action scoped to canvas only — see DrawingCanvas */
+}
+
+/* Only block default touch on the gesture/drawing canvas, not the whole app */
+canvas.gesture-canvas {
   touch-action: none;
 }
 
